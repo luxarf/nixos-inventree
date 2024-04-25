@@ -6,10 +6,10 @@
 self: super: {
   "django-dbbackup" = super.buildPythonPackage rec {
     pname = "django-dbbackup";
-    version = "4.0.2";
+    version = "4.1.0";
     src = fetchurl {
-      url = "https://files.pythonhosted.org/packages/fd/24/1d635364f42dad1d5213a97ada58eccbff8c0a1da906111aca90c0e0c370/django_dbbackup-4.0.2-py3-none-any.whl";
-      sha256 = "0apa15611mwwhlgay8rhc9bbbaz35mz8wymk66q8y9m8y4qyik9w";
+      url = "https://files.pythonhosted.org/packages/2f/48/c5c40b0e445a7d5661b68c8f3b0ec83b08bd516d64989a4df389193fb9ea/django_dbbackup-4.1.0-py3-none-any.whl";
+      sha256 = "10n7a46mjv05j9jzzi36bjjfvf76krqv7fmdxyl256j2dcjbaff5";
     };
     format = "wheel";
     doCheck = false;
@@ -226,10 +226,10 @@ self: super: {
   };
   "django-weasyprint" = super.buildPythonPackage rec {
     pname = "django-weasyprint";
-    version = "2.2.1";
+    version = "2.2.2";
     src = fetchurl {
-      url = "https://files.pythonhosted.org/packages/8a/a2/380a826e57eb97f30d21f46cc6074af5ef0b2f5cfcc4343540771a26fde9/django_weasyprint-2.2.1-py3-none-any.whl";
-      sha256 = "02q9363a36qqaylxs69pl6kkmljx8nkq1ksmlc4iv3xkgs4qrr4c";
+      url = "https://files.pythonhosted.org/packages/2f/f4/0ce7fb2692d10478644170649b794f4b22a725334c7281e756b63080e747/django_weasyprint-2.2.2-py3-none-any.whl";
+      sha256 = "0a1pyl4pl2p9pzhp7hkzcdnasc4k2f0sbnhglq808v14sc6vlpk0";
     };
     format = "wheel";
     doCheck = false;
@@ -255,6 +255,44 @@ self: super: {
     nativeBuildInputs = [];
     propagatedBuildInputs = [
       self."django"
+    ];
+  };
+  "opentelemetry-instrumentation-redis" = super.buildPythonPackage rec {
+    pname = "opentelemetry-instrumentation-redis";
+    version = "0.43b0";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/8c/29/c842b5e25e142b0785ebd9c677985755cd1f1c6f2c8128e86357f2f6c40a/opentelemetry_instrumentation_redis-0.43b0-py3-none-any.whl";
+      sha256 = "0cbcxjww90f7lhq3wx8fhlkag0cl4xxg3dj87rdg0p0q2x3paia0";
+    };
+    format = "wheel";
+    doCheck = false;
+    buildInputs = [];
+    checkInputs = [];
+    nativeBuildInputs = [];
+    propagatedBuildInputs = [
+      self."opentelemetry-api"
+      self."opentelemetry-instrumentation"
+      self."opentelemetry-semantic-conventions"
+      self."wrapt"
+    ];
+  };
+  "opentelemetry-instrumentation-requests" = super.buildPythonPackage rec {
+    pname = "opentelemetry-instrumentation-requests";
+    version = "0.43b0";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/3b/a9/98618c6383cad51313f448412cadd0bed43634f0287eaf67a3e71a536f9c/opentelemetry_instrumentation_requests-0.43b0-py3-none-any.whl";
+      sha256 = "0bbkww5s0aj1418ha3vgfla50siwy8s830nx0yi9524cmdi0i7fd";
+    };
+    format = "wheel";
+    doCheck = false;
+    buildInputs = [];
+    checkInputs = [];
+    nativeBuildInputs = [];
+    propagatedBuildInputs = [
+      self."opentelemetry-api"
+      self."opentelemetry-instrumentation"
+      self."opentelemetry-semantic-conventions"
+      self."opentelemetry-util-http"
     ];
   };
   "py-moneyed" = super.buildPythonPackage rec {
