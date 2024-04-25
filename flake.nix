@@ -396,7 +396,7 @@
               wantedBy = [ "multi-user.target" ];
               environment = {
                 INVENTREE_CONFIG_FILE = toString cfg.configPath;
-                INVENTREE_SECRET_KEY_FILE = toStrin cfg.secretPath;
+                INVENTREE_SECRET_KEY_FILE = toString cfg.secretPath;
               };
               serviceConfig = {
                 User = defaultUser;
@@ -429,7 +429,7 @@
               wantedBy = [ "multi-user.target" ];
               environment = {
                 INVENTREE_CONFIG_FILE = toString cfg.configPath;
-                INVENTREE_SECRET_KEY_FILE = toStrin cfg.secretPath;
+                INVENTREE_SECRET_KEY_FILE = toString cfg.secretPath;
               };
               serviceConfig = {
                 User = defaultUser;
