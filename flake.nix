@@ -326,7 +326,7 @@
                 for details
               '';
             };
-            secret-file = mkOption {
+            secretPath = mkOption {
               type = types.path;
             };
 
