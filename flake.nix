@@ -2,7 +2,7 @@
   description = "Devshell and package definition";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-23.11";
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
@@ -20,7 +20,7 @@
       pythonOverrides = pkgs.callPackage ./python-overrides.nix { };
       customOverrides = pkgs.callPackage ./custom-overrides.nix { };
       packageOverrides = nixpkgs.lib.composeManyExtensions [ pythonOverrides customOverrides ];
-      python = pkgs.python3.override { inherit packageOverrides; };
+      python = pkgs.python311.override { inherit packageOverrides; };
       pythonPackages = import ./python-all-requirements.nix;
       pythonWithPackages = python.withPackages pythonPackages;
     in {
@@ -41,7 +41,7 @@
             (pkgs.fetchzip {
               name = "inventree-frontend";
               url = "https://github.com/inventree/InvenTree/releases/download/${version}/frontend-build.zip";
-              hash = "sha256-w4QJ03Bgy9hikrSIaJzqeEwlR+hHkBZ0bljXp+JW56o=";
+              hash = "sha256-Yj2SIJdABAFm2VBFlMGOwhr3SGod0R72+E8NfjBR5PI=";
               stripRoot=false;
             })
           ];
@@ -207,22 +207,30 @@
             '';
           };
 
+        buildEnv = pkgs.buildEnv {
+          name = "inventree-build-env";
+          paths = [
+            pip2nix.packages.${system}.pip2nix.python39
+            pkgs.yarn
+            pkgs.yarn2nix
+          ];
+        };
+        default = pkgs.symlinkJoin {
+          name = "default packges";
+          paths = [
+              pythonWithPackages
+              self.packages.${system}.inventree-server
+              self.packages.${system}.inventree-cluster
+              self.packages.${system}.inventree-gen-secret
+              self.packages.${system}.inventree-python
+              self.packages.${system}.inventree-invoke
+              self.packages.${system}.inventree-refresh-users
+          ];
+        };
       };
-      devShell = pkgs.mkShell {
-        inputsFrom = [
-          self.packages.${system}.inventree-server
-        ];
-        nativeBuildInputs = [
-          pip2nix.packages.${system}.pip2nix.python39
-          pythonWithPackages
-          pkgs.yarn
-          pkgs.yarn2nix
-          self.packages.${system}.inventree-server
-          self.packages.${system}.inventree-cluster
-          self.packages.${system}.inventree-gen-secret
-          self.packages.${system}.inventree-python
-          self.packages.${system}.inventree-invoke
-          self.packages.${system}.inventree-refresh-users
+      devShells.default = pkgs.mkShell {
+        packages = [
+          self.packages.${system}.buildEnv
         ];
       };
     }) // {

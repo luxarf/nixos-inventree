@@ -3,6 +3,6 @@
 self: super: {
     # django-maintenance-mode patch is broken on latest nixos-unstable?
     django-maintenance-mode = super.django-maintenance-mode.overrideAttrs (old: {
-        patches = [];
+        doCheck = false;
     });
 }
