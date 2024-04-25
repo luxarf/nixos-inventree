@@ -18,7 +18,7 @@ base_list = get_requirements_list()
 def only_existing_pkgs(package):
     search_str = f"{PYTHON_PACKAGES}.{package}"
     proc = subprocess.run(
-        f'nix search nixpkgs "{search_str}"',
+        f'nix search -I nixpkgs=flake:nixpkgs nixpkgs "{search_str}"',
         shell=True,
         capture_output=True,
         text=True,
@@ -34,7 +34,7 @@ def only_existing_pkgs(package):
 
 def get_existing_requirements():
     print("Searching for overrides already present on nixpkgs")
-    pool = ThreadPool(len(base_list))
+    pool = ThreadPool(processes=4) #len(base_list))
     existing_packages = sorted(
         [p for p in pool.map(only_existing_pkgs, base_list) if p])
     return existing_packages
