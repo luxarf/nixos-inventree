@@ -15,7 +15,7 @@
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
-      version = "0.13.0";
+      version = "0.14.5";
 
       pythonOverrides = pkgs.callPackage ./python-overrides.nix { };
       customOverrides = pkgs.callPackage ./custom-overrides.nix { };
@@ -33,12 +33,10 @@
           srcs = [
             (pkgs.fetchFromGitHub {
               name = "inventree-src";
-              #owner = "inventree";
-              owner = "Gigahawk";
+              owner = "inventree";
               repo = "InvenTree";
-              #rev = version;
-              rev = "eb5b161617fc5ff36e91ab007008736b1d37a0d7";
-              hash = "sha256-oTkL7Lu+llj1O23Ql1EQKt24UmTLxJNYT5cJhcEReWQ=";
+              rev = version;
+              hash = "sha256-QVvcFjCOG07luyE/5zqamYcC5O9oDk0gnivN5tJn2yw=";
             })
             (pkgs.fetchzip {
               name = "inventree-frontend";
@@ -70,7 +68,7 @@
           '';
 
           meta = with lib; {
-            homepage = "https://github.com/Gigahawk/nixos-inventree";
+            homepage = "https://github.com/luxarf/nixos-inventree";
             description = "InvenTree packaged for nixos";
             license = licenses.gpl3;
             platforms = platforms.all;
