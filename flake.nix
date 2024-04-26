@@ -207,14 +207,6 @@
             '';
           };
 
-        buildEnv = pkgs.buildEnv {
-          name = "inventree-build-env";
-          paths = [
-            pip2nix.packages.${system}.pip2nix.python39
-            pkgs.yarn
-            pkgs.yarn2nix
-          ];
-        };
         default = pkgs.symlinkJoin {
           name = "default packges";
           paths = [
@@ -230,7 +222,9 @@
       };
       devShells.default = pkgs.mkShell {
         packages = [
-          self.packages.${system}.buildEnv
+            pip2nix.packages.${system}.pip2nix.python39
+            pkgs.yarn
+            pkgs.yarn2nix
         ];
       };
     }) // {
