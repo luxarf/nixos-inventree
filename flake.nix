@@ -211,6 +211,17 @@
               pkgs.nixfmt
             ];
           };
+          builtPackages = pkgs.mkShell {
+            packages = [
+              pythonWithPackages
+              self.packages.${system}.inventree-server
+              self.packages.${system}.inventree-cluster
+              self.packages.${system}.inventree-gen-secret
+              self.packages.${system}.inventree-python
+              self.packages.${system}.inventree-invoke
+              self.packages.${system}.inventree-refresh-users
+            ];
+          };
         };
       }) // {
         nixosModule = { lib, pkgs, config, ... }:
