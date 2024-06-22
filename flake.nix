@@ -11,7 +11,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        version = "0.14.5";
+        version = "0.15.4";
 
         pythonOverrides = pkgs.callPackage ./python-overrides.nix { };
         customOverrides = pkgs.callPackage ./custom-overrides.nix { };
