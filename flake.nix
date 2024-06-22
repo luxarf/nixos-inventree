@@ -180,11 +180,11 @@
                 echo "Removing any existing secret $INVENTREE_SECRET_KEY_FILE"
                 rm -rf "$INVENTREE_SECRET_KEY_FILE"
                 python ${genScript}
-                echo "Removing temp config file $INVENTREE_CONFIG_FILE"
-                rm "$INVENTREE_CONFIG_FILE"
+                # echo "Removing temp config file $INVENTREE_CONFIG_FILE"
+                # rm "$INVENTREE_CONFIG_FILE"
                 # TODO: is this something we actually want to do?
                 echo "Secret key written to $INVENTREE_SECRET_KEY_FILE"
-                cat "$INVENTREE_SECRET_KEY_FILE"
+                # cat "$INVENTREE_SECRET_KEY_FILE"
                 echo
                 popd > /dev/null 2>&1
               '';
